@@ -2,7 +2,6 @@
 require 'fileutils'
 #Create varible that has all possible charaters the varible NAME can have
 characters = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a
-
 # Start variable creations that we will use in the commands that we will execute
 NAME = (0..5).map{characters.sample}.join
 ROLE="go"
