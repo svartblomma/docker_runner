@@ -1,0 +1,11 @@
+- command: /common/roles/parse/files/nodesource_setup.sh
+
+- name: Install list of packages
+  action: apt pkg={{item}} state=installed
+  with_items:
+      - git
+      - nodejs
+
+- command: npm install -g parse-server mongodb-runner
+- shell: nohup mongodb-runner start &
+- shell: nohup parse-server --appId auction --masterKey test --databaseURI mongodb://localhost/test &

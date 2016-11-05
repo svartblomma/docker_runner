@@ -1,0 +1,10 @@
+[Unit]
+Description=Init Script
+After=network.target
+
+[Service]
+User=root
+ExecStart=/sbin/runconfig.sh
+
+[Install]
+WantedBy=multi-user.target

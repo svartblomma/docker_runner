@@ -1,0 +1,9 @@
+- name: restart mesos slave
+  service: name=mesos-slave state=restarted
+
+- name: restart consul-template
+  service: name=consul-template state=restarted
+
+- name: rebuild mesos slave
+  file: path=/tmp/mesos/meta/slaves/ state=absent
+  notify: restart mesos slave

@@ -1,0 +1,9 @@
+- hosts: parse
+  user: root
+  roles:
+     - role: parse
+
+- hosts: go
+  user: root
+  roles:
+     - role: go

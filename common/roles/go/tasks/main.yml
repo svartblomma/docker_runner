@@ -1,0 +1,32 @@
+#go get -t github.com/ParsePlatform/parse-cli
+- name: Install list of packages
+  action: apt pkg={{item}} state=installed
+  with_items:
+      - git
+      - vim
+
+- name: remove existing golang
+  file: path=/usr/local/go state=absent
+
+- name: get golang
+  get_url: url=https://storage.googleapis.com/golang/go{{ version }}.{{ os }}-{{ arch }}.tar.gz dest=/usr/src/go{{ version }}.{{ os }}-{{ arch }}.tar.gz validate_certs=False
+
+- name: install golang
+  unarchive: src=/usr/src/go{{ version }}.{{ os }}-{{ arch }}.tar.gz dest=/usr/local copy=no
+
+- name: Add the Go bin directory to the PATH environment variable for all users
+  copy:
+    src: go-bin.sh
+    dest: /etc/profile.d
+
+- name: Set GOPATH for all users
+  copy:
+    src: go-path.sh
+    dest: /etc/profile.d
+
+- name: Reload Paths
+  copy:
+    src: source.sh
+    dest: /host
+
+
